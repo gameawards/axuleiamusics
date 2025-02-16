@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="../../ico.jpg" type="image/png">
+  <title>Music Axuléia</title>
+</head>
+<style>
+  body {
+    background: linear-gradient(to bottom, #000000, rgb(90, 64, 46));
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* Alinha horizontalmente no centro */
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .container {
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    margin-top: 300px;
+  }
+
+  .image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    margin-top: -200px;
+
+    /* Adicionando a sombra */
+    box-shadow: 25px 25px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Estilo do ícone no canto superior direito */
+  .music-list-icon {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    font-size: 40px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  /* Estilo da sub-aba que será exibida */
+  .music-list-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    display: none;
+    padding: 20px;
+    overflow-y: auto;
+    /* Ativa a rolagem vertical */
+    z-index: 1000;
+    box-sizing: border-box;
+    /* Para garantir que o padding não afete a altura total */
+  }
+
+
+
+  /* Estilo do botão de fechar */
+  .close-music-list {
+    position: absolute;
+    top: 5px;
+    right: 230px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .close-music-list:hover {
+    color: #f39c12;
+  }
+
+  /* Estilo da lista de músicas */
+  #music-list {
+    list-style-type: none;
+    padding: 0;
+    max-height: calc(100% - 60px);
+    /* Deixa um espaço para o botão de fechar */
+    overflow-y: auto;
+    /* Ativa a rolagem da lista */
+  }
+
+  #music-list li {
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  #music-list li:hover {
+    color: #f39c12;
+  }
+
+  /* Estilo minimalista da barra de rolagem */
+  .music-list-container::-webkit-scrollbar {
+    width: 8px;
+    /* Largura da barra de rolagem */
+  }
+
+  .music-list-container::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    /* Cor do thumb */
+    border-radius: 10px;
+  }
+
+  .music-list-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    /* Cor de fundo do track */
+    border-radius: 10px;
+  }
+
+  /* Estilo minimalista da barra de rolagem da lista */
+  #music-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #music-list::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    /* Cor do thumb */
+    border-radius: 10px;
+  }
+
+  #music-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    /* Cor de fundo do track */
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .music-info-container {
+    display: flex;
+    /* Flexbox para alinhar os itens lado a lado */
+    justify-content: center;
+    /* Centraliza os itens horizontalmente */
+    gap: 20px;
+    /* Adiciona um espaçamento pequeno entre o artista e o álbum */
+    font-size: 0.9rem;
+    /* Fonte menor para a descrição */
+    color: #888;
+    /* Cor suave */
+    margin-top: 10px;
+    /* Espaço entre o título e as informações */
+  }
+
+  .music-info-container p {
+    margin: 0;
+    /* Remove margens extras */
+    padding: 0;
+    /* Remove padding extra */
+  }
+
+
+  .progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  input[type="range"] {
+    width: 80%;
+    margin-top: 20px;
+    background: #ddd;
+    height: 5px;
+    border-radius: 5px;
+    appearance: none;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: #f39c12;
+  }
+
+  /* Controles de Navegação ao lado da barra */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s ease;
+  }
+
+  button:hover {
+    color: #f39c12;
+  }
+
+
+
+  button#shuffle.active {
+    color: #f39c12;
+    /* Destaque para quando aleatório está ativo */
+  }
+
+  /* Estilo do container de volume */
+  .volume-container {
+    position: fixed;
+    bottom: 20px;
+    /* Distância do fundo */
+    right: 20px;
+    /* Distância da direita */
+    display: flex;
+    flex-direction: column-reverse;
+    /* Inverte a ordem dos elementos */
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* Estilo do ícone de volume */
+  #volume-icon {
+    font-size: 30px;
+    color: white;
+    transition: color 0.3s;
+  }
+
+  .volume-range {
+    -webkit-appearance: slider-vertical;
+    width: 10px;
+    /* Largura do controle de volume */
+    height: 100px;
+    /* Altura do controle de volume */
+    margin-bottom: 10px;
+    /* Espaço entre o controle e o ícone */
+    background: #ddd;
+    border-radius: 5px;
+    display: flex;
+    opacity: 0%;
+  }
+
+  /* Mostrar o controle de volume ao passar o mouse sobre o ícone */
+  .volume-container:hover .volume-range {
+    display: block;
+    opacity: 100%;
+    transition: 0.3s;
+  }
+
+  /* Estilo do controle de volume */
+  #volume-control {
+    transform: rotate(180deg);
+    /* Deixa o controle de volume na vertical */
+  }
+
+  /* Personalização do slider de volume */
+  .volume-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+
+  .volume-range::-webkit-slider-runnable-track {
+    background: #ccc;
+    height: 100%;
+  }
+
+  .volume-range::-moz-range-thumb {
+    background-color: #ffcc00;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+
+  .volume-range::-moz-range-track {
+    background: #ccc;
+    height: 100%;
+  }
+</style>
+
+<body>
+  <div>
+    <a href="../../index.html"><button class="close"><i class="bi bi-x-lg"></i></button></a>
+  </div>
+
+  <div class="image"><img id="music-image" src="image.png" alt="Capa da música" width="250" height="250"> </div>
+  <div class="container">
+
+    <h1 id="music-title">------</h1>
+    <div class="music-info-container">
+      <p id="music-artist"></p> <!-- Artista -->
+      <p id="music-album"></p> <!-- Álbum -->
+    </div>
+
+
+    <!-- Ícone do canto superior direito -->
+    <div id="music-list-icon" class="music-list-icon">
+      <i class="bi bi-list"></i> <!-- Ícone do list -->
+    </div>
+
+    <!-- Sub-aba para a lista de músicas -->
+    <div id="music-list-container" class="music-list-container">
+      <!-- Botão de fechar -->
+      <button id="close-music-list" class="close-music-list">←</button>
+
+      <!-- Lista de músicas -->
+      <ul id="music-list"></ul>
+
+    </div>
+
+    <!-- Controle de Progresso no meio -->
+    <div class="progress-container">
+      <input type="range" class="form-range" id="progress" value="0" max="100" step="0.1">
+    </div>
+
+    <!-- Controles Personalizados ao lado da barra de progresso -->
+    <div class="controls">
+      <!-- Botão de Play/Pause -->
+      <!-- Botão de Voltar (Prev) -->
+      <button id="prev">
+        <i class="bi bi-chevron-double-left"></i>
+      </button>
+      <button id="playPause">
+        <i class="bi bi-play"></i>
+      </button>
+
+      <!-- Botão de Avançar (Next) -->
+      <button id="next">
+        <i class="bi bi-chevron-double-right"></i>
+      </button>
+
+      <button id="shuffle">
+        <i class="bi bi-shuffle"></i>
+      </button>
+      
+    </div>
+  </div>
+  <div class="volume-container">
+    <i class="bi bi-volume-up" id="volume-icon"></i> <!-- Ícone de volume do Bootstrap Icons -->
+    <input type="range" class="volume-range" id="volume-control" min="0" max="100" value="100" />
+  </div>
+  
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <script>
+    const API_KEY = 'AIzaSyB_wsYo5L6u-bvdJCdE__UvqTKRQ9SWOyo';
+  const FOLDER_ID = '1ruER2YBCr_07zZgfBouEptx2F5yYj-PF';
+  
+  let tracks = [];
+  let currentTrackIndex = 0;
+  let isPlaying = false;
+  
+  const audio = new Audio();
+  const playPauseButton = document.getElementById('playPause');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+  const musicList = document.getElementById('music-list');
+  const musicTitle = document.getElementById('music-title');
+  const progressBar = document.getElementById('progress');
+  const volumeControl = document.getElementById('volume-control');
+  const volumeIcon = document.getElementById('volume-icon');
+  const musicListIcon = document.getElementById('music-list-icon');
+  const musicListContainer = document.getElementById('music-list-container');
+  const closeMusicListButton = document.getElementById('close-music-list');
+  const shuffleButton = document.getElementById('shuffle');
+  let isShuffle = false;
+  
+  // Alternar o modo aleatório ao clicar no botão
+  shuffleButton.addEventListener('click', () => {
+      isShuffle = !isShuffle;
+      shuffleButton.classList.toggle('active'); // Estiliza o botão quando ativado
+  });
+  
+  // Função para obter um índice aleatório diferente do atual
+  function getRandomTrackIndex() {
+      let randomIndex;
+      do {
+          randomIndex = Math.floor(Math.random() * tracks.length);
+      } while (randomIndex === currentTrackIndex); // Evita repetir a mesma música
+      return randomIndex;
+  }
+  
+  // Modifica a lógica de próxima música
+  nextButton.addEventListener('click', () => {
+      let nextIndex;
+      if (isShuffle) {
+          nextIndex = getRandomTrackIndex();
+      } else {
+          nextIndex = (currentTrackIndex + 1) % tracks.length;
+      }
+      
+      loadTrack(nextIndex);
+      playTrack();
+  });
+  
+  // Modifica o evento 'ended' para respeitar o shuffle
+  audio.addEventListener('ended', () => {
+      if (isShuffle) {
+          currentTrackIndex = getRandomTrackIndex();
+      } else {
+          currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+      }
+      loadTrack(currentTrackIndex);
+      playTrack();
+  });
+  
+  // Mostra a lista de músicas ao clicar no ícone 📜
+  musicListIcon.addEventListener('click', () => {
+      musicListContainer.style.display = 'block';
+      musicListContainer.style.opacity = '1';
+  });
+  
+  // Esconde a lista de músicas ao clicar no botão ←
+  closeMusicListButton.addEventListener('click', () => {
+      musicListContainer.style.opacity = '0';
+      setTimeout(() => {
+          musicListContainer.style.display = 'none';
+      }, 300); // Tempo para animação suave
+  });
+  // Inicializa o volume no máximo
+  audio.volume = 1.0;
+  volumeControl.value = 100;
+  
+  async function fetchMusicFiles() {
+      const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents&key=${API_KEY}&fields=files(id, name)`;
+      const response = await fetch(url);
+      const data = await response.json();
+  
+      tracks = data.files
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(file => ({
+              title: file.name,
+              path: `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${API_KEY}`
+          }));
+  
+      updateMusicList();
+      if (tracks.length > 0) {
+          loadTrack(0);
+      }
+  }
+  
+  function updateMusicList() {
+      musicList.innerHTML = '';
+      
+      tracks.forEach((track, index) => {
+          const li = document.createElement('li');
+          let title = track.title;
+  
+          // Remove a extensão '.mp3' do título
+          title = title.replace(/\.mp3$/, '');
+  
+          // Abrevia títulos com mais de 25 caracteres
+          if (title.length > 25) {
+              title = title.substring(0, 22) + '...';
+          }
+  
+          li.textContent = title;
+          li.addEventListener('click', () => {
+              loadTrack(index);
+              playTrack();
+          });
+  
+          musicList.appendChild(li);
+      });
+  }
+  
+  
+  function loadTrack(index) {
+      currentTrackIndex = index;
+      audio.src = tracks[currentTrackIndex].path;
+      musicTitle.textContent = tracks[currentTrackIndex].title;
+      let title = tracks[currentTrackIndex].title.replace(/\.mp3$/, '');
+      musicTitle.textContent = title;
+      audio.load();
+      updateProgress();
+  }
+  
+  audio.addEventListener('timeupdate', updateProgress);
+  
+  audio.addEventListener('loadedmetadata', () => {
+      progressBar.max = audio.duration;
+      progressBar.value = 0;
+  });
+  
+  audio.addEventListener('ended', () => {
+      currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+      loadTrack(currentTrackIndex);
+      playTrack();
+  });
+  
+  function updateProgress() {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
+          progressBar.max = audio.duration;
+          progressBar.value = audio.currentTime;
+      }
+  }
+  
+  // Atualiza a música para o ponto escolhido na barra
+  progressBar.addEventListener('input', () => {
+      audio.currentTime = progressBar.value;
+  });
+  
+  function playTrack() {
+      audio.play();
+      isPlaying = true;
+      playPauseButton.innerHTML = '<i class="bi bi-pause"></i>';
+  }
+  
+  function togglePlayPause() {
+      if (isPlaying) {
+          audio.pause();
+          playPauseButton.innerHTML = '<i class="bi bi-play"></i>';
+      } else {
+          audio.play();
+          playPauseButton.innerHTML = '<i class="bi bi-pause"></i>';
+      }
+      isPlaying = !isPlaying;
+  }
+  
+  // Controle de volume
+  volumeControl.addEventListener('input', () => {
+      const volume = volumeControl.value / 100;
+      audio.volume = volume;
+      updateVolumeIcon(volume);
+  });
+  
+  // Atualiza o ícone de volume com base no nível
+  function updateVolumeIcon(volume) {
+      if (volume === 0) {
+          volumeIcon.className = "bi bi-volume-mute";
+      } else if (volume < 0.5) {
+          volumeIcon.className = "bi bi-volume-down";
+      } else {
+          volumeIcon.className = "bi bi-volume-up";
+      }
+  }
+  
+  // Toggle mudo ao clicar no ícone
+  volumeIcon.addEventListener('click', () => {
+      if (audio.volume > 0) {
+          audio.dataset.prevVolume = audio.volume;
+          audio.volume = 0;
+          volumeControl.value = 0;
+          updateVolumeIcon(0);
+      } else {
+          audio.volume = audio.dataset.prevVolume || 1;
+          volumeControl.value = audio.volume * 100;
+          updateVolumeIcon(audio.volume);
+      }
+  });
+  
+  playPauseButton.addEventListener('click', togglePlayPause);
+  
+  prevButton.addEventListener('click', () => {
+      currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+      loadTrack(currentTrackIndex);
+      playTrack();
+  });
+  
+  document.addEventListener('DOMContentLoaded', fetchMusicFiles);
+  
+  </script>
+</html>

@@ -1,0 +1,1182 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-image: url(background.jpg);
+    background-position: 100%;
+    overflow-y: auto;
+    margin-bottom: 200px;
+}
+header{
+    display: none;
+}
+
+
+.beta-notice {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.beta-content {
+    background-image: url(backgroundblur.png);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    width: 60%;
+    height: 22%;
+    color: white;
+}
+
+.beta-content button {
+    background-color: #754e28;
+    border-color: #000;
+    
+}
+
+.beta-content button:hover {
+    background-color: #a16f3d;
+    border-color: #000;
+    
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    display: none;
+  }
+  
+  .navbar .logo a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    display: none;
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    display: flex;
+    display: none;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+    display: none;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: none;
+  }
+  
+  .nav-links a:hover {
+    color: #f39c12;
+    display: none;
+  }
+
+
+::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+/* Estilo do "polegar" (parte que você arrasta) da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(232, 164, 119); /* Cor da barra de rolagem */
+    border-radius: 4px; /* Bordas arredondadas no "polegar" */
+    border: 2px solid transparent; /* Borda invisível */
+    background-clip: content-box; /* Garante que a cor de fundo não se espalhe pela borda */
+}
+
+/* Quando o polegar da rolagem está sendo "hovered" (passado o mouse sobre ele) */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(215, 139, 89); /* Cor um pouco mais escura quando o mouse passa */
+}
+
+/* Estilo da parte de fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+    background-color: #000000; /* Cor de fundo do trilho da barra de rolagem */
+    border-radius: 4px; /* Bordas arredondadas no fundo */
+}
+
+/* Exemplo de conteúdo que vai além da altura da tela, causando rolagem */
+.content {
+    height: 1500px; /* Define uma altura maior que a altura da tela para ativar a rolagem */
+    padding: 20px;
+}
+
+/* Barra Lateral à Esquerda */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 400px;
+    background-color: #161616;
+    color: white;
+    padding-top: 20px;
+    text-align: center;
+    background-color: rgba(31, 31, 31, 0.747);
+}
+
+.buttonssidebar {
+    margin-top: 40px;
+}
+
+.sidebar img {
+    height: 64px;
+    width: 64px;
+    margin-bottom: 20px;
+}
+
+.sidebar h1 {
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.sidebar h4 {
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: underline;
+}
+
+
+.sidebar a {
+    color: rgb(156, 122, 98);
+    text-decoration: none;
+    display: block;
+    margin: 15px 0;
+    font-size: 20px;
+}
+
+.sidebar a:hover {
+    color: rgb(232, 164, 119);
+    transition: 0.3s;
+}
+
+/* Ícones de redes sociais no fundo da barra lateral */
+.social-icons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.social-icons a {
+    margin: 10px;
+    color: white;
+    font-size: 25px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #00aced;
+    /* Cor para o hover (ajustar conforme necessidade) */
+}
+
+/* Estilos para o vídeo de fundo */
+.conteudo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Estilos para o conteúdo da página */
+.main-content {
+    margin-left: 250px;
+    /* Espaço para a barra lateral */
+    padding: 20px;
+}
+
+.title1 {
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 30%;
+    top: 10%
+}
+
+.title2 {
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 30%;
+    top: 37%
+}
+
+
+
+.playlist-item1 {
+    margin: 0 15px;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 16%;
+    left: 30%;
+}
+
+/* Botão para as playlists */
+.playlist-item1:hover {
+    background-color: #da9414;
+    color: white;
+    transition: 0.4s;
+    .name{
+        color: #da9414;
+        transition: 0.4s;
+       }
+}
+
+
+
+/* Barra no meio da tela */
+.playlist-bar {
+    position: absolute;
+    top: 52%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 800px;
+    
+}
+
+/* Contêiner para as playlists */
+.playlist-container {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.playlist-item {
+    margin: 0 15px;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Botão para as playlists */
+.playlist-item:hover {
+    background-color: #da9414;
+    transition: 0.4s;
+   .name{
+    color: #da9414;
+    transition: 0.4s;
+   }
+}
+.playlist-item1 p {
+    position: absolute;
+    top: 105%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.playlist-item p {
+    position: absolute;
+    top: 105%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.playlist-item2 p {
+    position: absolute;
+    top: 105%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.playlist-item3 p {
+    position: absolute;
+    top: 105%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.title3 {
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 30%;
+    top: 64%
+}
+
+/* Barra no meio da tela */
+.playlist-bar2 {
+    position: absolute;
+    top: 78%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Contêiner para as playlists */
+.playlist-container2 {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.playlist-item2 {
+    margin: 0 15px;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Botão para as playlists */
+.playlist-item2:hover {
+    background-color: #da9414;
+    color: white;
+    transition: 0.4s;
+    .name{
+        color: #da9414;
+        transition: 0.4s;
+       }
+}
+
+.title4{
+    color: rgb(232, 164, 119);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 30%;
+    top: 91%
+}
+
+.playlist-bar3 {
+    position: absolute;
+    top: 105%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Contêiner para as playlists */
+.playlist-container3 {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.playlist-item3 {
+    margin: 0 15px;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Botão para as playlists */
+.playlist-item3:hover {
+    background-color: #da9414;
+    color: white;
+    transition: 0.4s;
+    .name{
+        color: #da9414;
+        transition: 0.4s;
+       }
+}
+
+
+
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+
+
+
+@media only screen and (max-width: 1590px){
+    .title1 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+        position: absolute;
+        left: 30%;
+        top: 10%
+    }
+    
+    .title2 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+        position: absolute;
+        left: 30%;
+        top: 42%
+    }
+    
+    
+    
+    .playlist-item1 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 16%;
+        left: 30%;
+    }
+    
+    /* Botão para as playlists */
+    .playlist-item1:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    
+    
+    /* Barra no meio da tela */
+    .playlist-bar {
+        position: absolute;
+        top: 57%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+        
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item:hover {
+        background-color: #da9414;
+        transition: 0.4s;
+       .name{
+        color: #da9414;
+        transition: 0.4s;
+       }
+    }
+    .playlist-item1 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    .playlist-item p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    .playlist-item2 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    .playlist-item3 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+    }
+    
+    .title3 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+        position: absolute;
+        left: 30%;
+        top: 75%
+    }
+    
+    /* Barra no meio da tela */
+    .playlist-bar2 {
+        position: absolute;
+        top: 90%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container2 {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item2 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item2:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    .title4{
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 25px;
+        position: absolute;
+        left: 30%;
+        top: 110%
+    }
+    
+    .playlist-bar3 {
+        position: absolute;
+        top: 126%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container3 {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item3 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item3:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    
+}
+
+
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+
+
+
+@media only screen and (max-width: 1390px){
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 400px;
+        background-color: #16161600;
+        color: white;
+        padding-top: 20px;
+        text-align: center;
+        background-color: rgba(31, 31, 31, 0.747);
+        display:none;
+    }
+
+    .title1 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+        position: absolute;
+        left: 10%;
+        top: 15%
+    }
+    
+    .title2 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+        position: absolute;
+        left: 10%;
+        top: 50%
+    }
+    
+    
+    
+    .playlist-item1 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 21%;
+        left: 8%;
+    }
+    
+    /* Botão para as playlists */
+    .playlist-item1:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    
+    
+    /* Barra no meio da tela */
+    .playlist-bar {
+        position: absolute;
+        top: 67%;
+        left: 46%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+        
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item:hover {
+        background-color: #da9414;
+        transition: 0.4s;
+       .name{
+        color: #da9414;
+        transition: 0.4s;
+       }
+    }
+    .playlist-item1 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: none;
+    }
+    
+    .playlist-item p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: none;
+    }
+    
+    .playlist-item2 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: none;
+    }
+    
+    .playlist-item3 p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: none;
+    
+    }
+    
+    .title3 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+        position: absolute;
+        left: 10%;
+        top: 86%
+    }
+    
+    /* Barra no meio da tela */
+    .playlist-bar2 {
+        position: absolute;
+        top: 103%;
+        left: 46%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container2 {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item2 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item2:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    .title4{
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+        position: absolute;
+        left: 10%;
+        top: 125%
+    }
+    
+    .playlist-bar3 {
+        position: absolute;
+        top: 143%;
+        left: 46%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 800px;
+    }
+    
+    /* Contêiner para as playlists */
+    .playlist-container3 {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .playlist-item3 {
+        margin: 0 20px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    
+    /* Botão para as playlists */
+    .playlist-item3:hover {
+        background-color: #da9414;
+        color: white;
+        transition: 0.4s;
+        .name{
+            color: #da9414;
+            transition: 0.4s;
+           }
+    }
+    
+    
+}
+
+
+
+
+
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+/*==========================================================================================================================*/
+
+
+/* Estilos para dispositivos móveis */
+@media only screen and (max-width: 575px) {
+    body {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .sidebar {
+        display: none; /* Esconde a sidebar em telas pequenas */
+    }
+
+    /* Navbar ajustada para dispositivos móveis */
+    header {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #333;
+        padding: 15px;
+        position: relative;
+        z-index: 1000;
+    }
+
+    .navbar .logo a {
+        color: #fff;
+        font-size: 22px;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .nav-links a:hover {
+        color: #f39c12;
+    }
+
+    /* Títulos ajustados para telas menores */
+    .title1, .title2, .title3, .title4 {
+        color: rgb(232, 164, 119);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 16px;
+        position: relative;
+        left: 10%;
+    }
+
+    .title1 { top: 10%; display: none; }
+    .title2 { top: 30%; display: none;}
+    .title3 { top: 50%; display: none;}
+    .title4 { top: 70%; display: none;}
+
+    /* Playlist items ajustados para telas menores */
+    .playlist-item1 {
+        margin: 20px auto; /* Espaçamento entre as playlists */
+        padding: 30px;
+        background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.4s;
+        margin-left: 180px;
+    }
+
+    .playlist-item {
+        margin: 20px auto; /* Espaçamento entre as playlists */
+        padding: 30px;
+        background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        transition: background-color 0.4s;
+        margin-right: 300px;
+    }
+
+    .playlist-item2 {
+        margin: 20px auto; /* Espaçamento entre as playlists */
+        padding: 30px;
+        background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.4s;
+        margin-left: 300px;
+    }
+
+    .playlist-item3 {
+        margin: 25px auto; /* Espaçamento entre as playlists */
+        padding: 30px;
+        background-color: #000;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        transition: background-color 0.4s;
+        margin-left: 330px;
+    }
+
+
+
+
+    .playlist-item1:hover, .playlist-item2:hover, .playlist-item3:hover {
+        background-color: #da9414;
+        color: white;
+    }
+
+    /* Ajuste para os textos dentro dos itens */
+    .playlist-item p {
+        position: absolute;
+        top: 105%;
+        color: white;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* Barra de Playlists ajustada */
+    .playlist-bar, .playlist-bar2 {
+        position: absolute;
+        top: 50%;
+        left: 33%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        
+    }
+
+    .playlist-bar2 {
+        position: absolute;
+        top: 52%;
+        left: 32%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+    }
+
+
+    .playlist-bar3 {
+        position: absolute;
+        top: 51%;
+        left: 65%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+    }
+
+
+    /* Contêiner das playlists */
+    .playlist-container, .playlist-container2, .playlist-container3 {
+        display: flex;
+        flex-direction: column; /* Empilha os itens verticalmente */
+        gap: 20px; /* Adiciona espaçamento entre os itens */
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Ajuste para os itens de playlist */
+    .playlist-item {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 10px; /* Espaço entre os itens */
+    }
+}

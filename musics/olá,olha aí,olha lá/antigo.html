@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="../../ico.jpg" type="image/png">
+  <title>Music Axuléia</title>
+</head>
+<style>
+  body {
+    background: linear-gradient(to bottom, #000000, rgb(90, 64, 46));
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    /* Alinha horizontalmente no centro */
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .container {
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    margin-top: 300px;
+  }
+
+  .image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    margin-top: -200px;
+
+    /* Adicionando a sombra */
+    box-shadow: 25px 25px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Estilo do ícone no canto superior direito */
+  .music-list-icon {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    font-size: 40px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  /* Estilo da sub-aba que será exibida */
+  .music-list-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    display: none;
+    padding: 20px;
+    overflow-y: auto;
+    /* Ativa a rolagem vertical */
+    z-index: 1000;
+    box-sizing: border-box;
+    /* Para garantir que o padding não afete a altura total */
+  }
+
+
+
+  /* Estilo do botão de fechar */
+  .close-music-list {
+    position: absolute;
+    top: 5px;
+    right: 230px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .close-music-list:hover {
+    color: #f39c12;
+  }
+
+  /* Estilo da lista de músicas */
+  #music-list {
+    list-style-type: none;
+    padding: 0;
+    max-height: calc(100% - 60px);
+    /* Deixa um espaço para o botão de fechar */
+    overflow-y: auto;
+    /* Ativa a rolagem da lista */
+  }
+
+  #music-list li {
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  #music-list li:hover {
+    color: #f39c12;
+  }
+
+  /* Estilo minimalista da barra de rolagem */
+  .music-list-container::-webkit-scrollbar {
+    width: 8px;
+    /* Largura da barra de rolagem */
+  }
+
+  .music-list-container::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    /* Cor do thumb */
+    border-radius: 10px;
+  }
+
+  .music-list-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    /* Cor de fundo do track */
+    border-radius: 10px;
+  }
+
+  /* Estilo minimalista da barra de rolagem da lista */
+  #music-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #music-list::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    /* Cor do thumb */
+    border-radius: 10px;
+  }
+
+  #music-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    /* Cor de fundo do track */
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .music-info-container {
+    display: flex;
+    /* Flexbox para alinhar os itens lado a lado */
+    justify-content: center;
+    /* Centraliza os itens horizontalmente */
+    gap: 20px;
+    /* Adiciona um espaçamento pequeno entre o artista e o álbum */
+    font-size: 0.9rem;
+    /* Fonte menor para a descrição */
+    color: #888;
+    /* Cor suave */
+    margin-top: 10px;
+    /* Espaço entre o título e as informações */
+  }
+
+  .music-info-container p {
+    margin: 0;
+    /* Remove margens extras */
+    padding: 0;
+    /* Remove padding extra */
+  }
+
+
+  .progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  input[type="range"] {
+    width: 80%;
+    margin-top: 20px;
+    background: #ddd;
+    height: 5px;
+    border-radius: 5px;
+    appearance: none;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: #f39c12;
+  }
+
+  /* Controles de Navegação ao lado da barra */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s ease;
+  }
+
+  button:hover {
+    color: #f39c12;
+  }
+
+
+
+  button#shuffle.active {
+    color: #f39c12;
+    /* Destaque para quando aleatório está ativo */
+  }
+
+  /* Estilo do container de volume */
+  .volume-container {
+    position: fixed;
+    bottom: 20px;
+    /* Distância do fundo */
+    right: 20px;
+    /* Distância da direita */
+    display: flex;
+    flex-direction: column-reverse;
+    /* Inverte a ordem dos elementos */
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* Estilo do ícone de volume */
+  #volume-icon {
+    font-size: 30px;
+    color: white;
+    transition: color 0.3s;
+  }
+
+  .volume-range {
+    -webkit-appearance: slider-vertical;
+    width: 10px;
+    /* Largura do controle de volume */
+    height: 100px;
+    /* Altura do controle de volume */
+    margin-bottom: 10px;
+    /* Espaço entre o controle e o ícone */
+    background: #ddd;
+    border-radius: 5px;
+    display: flex;
+    opacity: 0%;
+  }
+
+  /* Mostrar o controle de volume ao passar o mouse sobre o ícone */
+  .volume-container:hover .volume-range {
+    display: block;
+    opacity: 100%;
+    transition: 0.3s;
+  }
+
+  /* Estilo do controle de volume */
+  #volume-control {
+    transform: rotate(180deg);
+    /* Deixa o controle de volume na vertical */
+  }
+
+  /* Personalização do slider de volume */
+  .volume-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+
+  .volume-range::-webkit-slider-runnable-track {
+    background: #ccc;
+    height: 100%;
+  }
+
+  .volume-range::-moz-range-thumb {
+    background-color: #ffcc00;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+
+  .volume-range::-moz-range-track {
+    background: #ccc;
+    height: 100%;
+  }
+</style>
+
+<body>
+  <div>
+    <a href="../../index.html"><button class="close"><i class="bi bi-x-lg"></i></button></a>
+  </div>
+
+  <div class="image"><img id="music-image" src="" alt="Capa da música" width="250" height="250"> </div>
+  <div class="container">
+
+    <h1 id="music-title">------</h1>
+    <div class="music-info-container">
+      <p id="music-artist"></p> <!-- Artista -->
+      <p id="music-album"></p> <!-- Álbum -->
+    </div>
+
+
+    <!-- Ícone do canto superior direito -->
+    <div id="music-list-icon" class="music-list-icon">
+      <i class="bi bi-list"></i> <!-- Ícone do list -->
+    </div>
+
+    <!-- Sub-aba para a lista de músicas -->
+    <div id="music-list-container" class="music-list-container">
+      <!-- Botão de fechar -->
+      <button id="close-music-list" class="close-music-list">←</button>
+
+      <!-- Lista de músicas -->
+      <ul id="music-list"></ul>
+
+    </div>
+
+    <!-- Controle de Progresso no meio -->
+    <div class="progress-container">
+      <input type="range" class="form-range" id="progress" value="0" max="100" step="0.1">
+    </div>
+
+    <!-- Controles Personalizados ao lado da barra de progresso -->
+    <div class="controls">
+      <!-- Botão de Play/Pause -->
+      <!-- Botão de Voltar (Prev) -->
+      <button id="prev">
+        <i class="bi bi-chevron-double-left"></i>
+      </button>
+      <button id="playPause">
+        <i class="bi bi-play"></i>
+      </button>
+
+      <!-- Botão de Avançar (Next) -->
+      <button id="next">
+        <i class="bi bi-chevron-double-right"></i>
+      </button>
+
+      <button id="shuffle">
+        <i class="bi bi-shuffle"></i>
+      </button>
+
+    </div>
+  </div>
+  <div class="volume-container">
+    <i class="bi bi-volume-up" id="volume-icon"></i> <!-- Ícone de volume do Bootstrap Icons -->
+    <input type="range" class="volume-range" id="volume-control" min="0" max="100" value="100" />
+  </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/music-metadata-browser@6.3.1/dist/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsmediatags"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.0/dist/jsmediatags.min.js"></script>
+
+<script>
+  const audio = document.createElement("audio"); // Criando o elemento de áudio
+  const playPauseButton = document.getElementById("playPause");
+  const prevButton = document.getElementById("prev");
+  const nextButton = document.getElementById("next");
+  const progress = document.getElementById("progress");
+  const shuffleButton = document.getElementById("shuffle");
+  const volumeControl = document.getElementById("volume-control");
+  const volumeIcon = document.getElementById("volume-icon");
+  const musicTitle = document.getElementById("music-title"); // Referência ao <h1> que exibirá o título da música
+  const musicArtist = document.getElementById("music-artist"); // Referência ao parágrafo do artista
+  const musicAlbum = document.getElementById("music-album");   // Referência ao parágrafo do álbum
+  const musicImage = document.querySelector(".image img");  // Referência ao <img> dentro da div.image
+  const musicListIcon = document.getElementById("music-list-icon");
+  const musicListContainer = document.getElementById("music-list-container");
+  const musicList = document.getElementById("music-list");
+  const closeMusicListButton = document.getElementById("close-music-list");
+
+  // Nova lista de faixas com título, artista, álbum e imagem
+  const tracks = [{"path":"a-ha - The Sun Always Shines on T.V..mp3","title":"The Sun Always Shine...","artist":"a-ha","album":"Hunting High and Low","image":"image.jpg"},{"path":"ABBA - Gimme! Gimme! Gimme! (A Man After Midnight).mp3","title":"Gimme! Gimme! Gimme!...","artist":"ABBA","album":"Voulez-Vous","image":"image.jpg"},{"path":"ABBA - Lay All Your Love On Me.mp3","title":"Lay All Your Love On...","artist":"ABBA","album":"Super Trouper","image":"image.jpg"},{"path":"ABBA - Mamma Mia.mp3","title":"Mamma Mia","artist":"ABBA","album":"Abba","image":"image.jpg"},{"path":"Aerosmith - Dream On.mp3","title":"Dream On","artist":"Aerosmith","album":"Aerosmith","image":"image.jpg"},{"path":"Alphaville - Big in Japan.mp3","title":"Big in Japan","artist":"Alphaville","album":"Forever Young","image":"image.jpg"},{"path":"Alphaville - Forever Young.mp3","title":"Forever Young","artist":"Alphaville","album":"Forever Young","image":"image.jpg"},{"path":"Alphaville - Sounds Like a Melody - 2019 Remaster.mp3","title":"Sounds Like a Melody...","artist":"Alphaville","album":"Forever Young (Super Deluxe Edition; 2019 Remaster)","image":"image.jpg"},{"path":"Army Of Lovers - Crucified.mp3","title":"Crucified","artist":"Army Of Lovers","album":"Le grand Docu-Soap","image":"image.jpg"},{"path":"Bananarama - Venus.mp3","title":"Venus","artist":"Bananarama","album":"True Confessions (Collector's Edition)","image":"image.jpg"},{"path":"Belinda Carlisle - Heaven Is A Place On Earth.mp3","title":"Heaven Is A Place On...","artist":"Belinda Carlisle","album":"Heaven on Earth (Remastered & Expanded Special Edition)","image":"image.jpg"},{"path":"Billy Joel - Pressure.mp3","title":"Pressure","artist":"Billy Joel","album":"The Nylon Curtain","image":"image.jpg"},{"path":"Billy Joel - We Didn't Start the Fire.mp3","title":"We Didn't Start the ...","artist":"Billy Joel","album":"Storm Front","image":"image.jpg"},{"path":"Bo Burnham - Bezos I.mp3","title":"Bezos I","artist":"Bo Burnham","album":"INSIDE","image":"image.jpg"},{"path":"Bon Jovi - Runaway.mp3","title":"Runaway","artist":"Bon Jovi","album":"Bon Jovi","image":"image.jpg"},{"path":"Bonnie Tyler - Holding Out for a Hero - From 'Footloose' Soundtrack.mp3","title":"Holding Out for a He...","artist":"Bonnie Tyler","album":"Secret Dreams and Forbidden Fire","image":"image.jpg"},{"path":"Chingon - Malaguena Salerosa.mp3","title":"Malaguena Salerosa","artist":"Chingon","album":"Kill Bill Vol. 2 Original Soundtrack","image":"image.jpg"},{"path":"Cream - White Room.mp3","title":"White Room","artist":"Cream","album":"Wheels Of Fire","image":"image.jpg"},{"path":"Daisy the Great, AJR - Record Player.mp3","title":"Record Player","artist":"Daisy the Great/AJR","album":"All You Need Is Time (Deluxe Edition)","image":"image.jpg"},{"path":"David Bowie - Cat People (Putting Out Fire).mp3","title":"Cat People (Putting ...","artist":"David Bowie","album":"A New Career in a New Town (1977 - 1982)","image":"image.jpg"},{"path":"David Bowie - Let's Dance - 2018 Remaster.mp3","title":"Let's Dance - 2018 R...","artist":"David Bowie","album":"Let's Dance (2018 Remaster)","image":"image.jpg"},{"path":"David Bowie - Modern Love - 2018 Remaster.mp3","title":"Modern Love - 2018 R...","artist":"David Bowie","album":"Let's Dance (2018 Remaster)","image":"image.jpg"},{"path":"David Bowie - The Man Who Sold the World - 2015 Remaster.mp3","title":"The Man Who Sold the...","artist":"David Bowie","album":"The Man Who Sold the World (2015 Remaster)","image":"image.jpg"},{"path":"Diana Ross - I'm Coming Out.mp3","title":"I'm Coming Out","artist":"Diana Ross","album":"Diana","image":"image.jpg"},{"path":"Disturbed - Down with the Sickness.mp3","title":"Down with the Sickne...","artist":"Disturbed","album":"The Sickness","image":"image.jpg"},{"path":"Earth, Wind & Fire - September.mp3","title":"September","artist":"Earth, Wind & Fire","album":"The Essential Earth, Wind & Fire","image":"image.jpg"},{"path":"Elton John - I'm Still Standing.mp3","title":"I'm Still Standing","artist":"Elton John","album":"Too Low For Zero","image":"image.jpg"},{"path":"Elvis Presley - If I Can Dream - Live from the '68 Comeback Special.mp3","title":"If I Can Dream - Liv...","artist":"Elvis Presley","album":"NBC-TV Special (Live)","image":"image.jpg"},{"path":"Elvis Presley - Suspicious Minds.mp3","title":"Suspicious Minds","artist":"Elvis Presley","album":"Elvis 30 #1 Hits","image":"image.jpg"},{"path":"Ennio Morricone - Rabbia e Tarantella.mp3","title":"Rabbia e Tarantella","artist":"Ennio Morricone","album":"Rabbia e Tarantella","image":"image.jpg"},{"path":"Europe - The Final Countdown.mp3","title":"The Final Countdown","artist":"Europe","album":"The Final Countdown (Expanded Edition)","image":"image.jpg"},{"path":"Fleetwood Mac - The Chain - 2004 Remaster.mp3","title":"The Chain - 2004 Rem...","artist":"Fleetwood Mac","album":"Rumours","image":"image.jpg"},{"path":"Frank Sinatra - My Way Of Life.mp3","title":"My Way Of Life","artist":"Frank Sinatra","album":"Cycles","image":"image.jpg"},{"path":"Frank Sinatra - That's Life.mp3","title":"That's Life","artist":"Frank Sinatra","album":"That's Life","image":"image.jpg"},{"path":"Frank Sinatra - The World We Knew (Over And Over).mp3","title":"The World We Knew (O...","artist":"Frank Sinatra","album":"The World We Knew","image":"image.jpg"},{"path":"Frank Sinatra - When You're Smiling (The Whole World Smiles With You) - 1999 Remastered.mp3","title":"When You're Smiling ...","artist":"Frank Sinatra","album":"Sinatra's Swingin' Session!!! And More (Remastered / Expanded Edition)","image":"image.jpg"},{"path":"Frankie Goes To Hollywood - Relax.mp3","title":"Relax","artist":"Frankie Goes To Hollywood","album":"Welcome To The Pleasuredome","image":"image.jpg"},{"path":"Gorillaz - DARE.mp3","title":"DARE","artist":"Gorillaz","album":"Demon Days","image":"image.jpg"},{"path":"Gorillaz - Rhinestone Eyes.mp3","title":"Rhinestone Eyes","artist":"Gorillaz","album":"Plastic Beach","image":"image.jpg"},{"path":"Hozier, Bear McCreary - Blood Upon the Snow.mp3","title":"Blood Upon the Snow","artist":"Hozier/Bear McCreary","album":"God of War Ragnarök (Original Soundtrack)","image":"image.jpg"},{"path":"Imagination - Just an Illusion.mp3","title":"Just an Illusion","artist":"Imagination","album":"In the Heat of the Night","image":"image.jpg"},{"path":"Imagine Dragons - Children of the Sky (a Starfield song).mp3","title":"Children of the Sky ...","artist":"Imagine Dragons","album":"Children of the Sky (a Starfield song)","image":"image.jpg"},{"path":"Imagine Dragons - Follow You.mp3","title":"Follow You","artist":"Imagine Dragons","album":"Mercury - Acts 1 & 2","image":"image.jpg"},{"path":"Imagine Dragons - Friction.mp3","title":"Friction","artist":"Imagine Dragons","album":"Smoke + Mirrors (Deluxe)","image":"image.jpg"},{"path":"Imagine Dragons - Roots.mp3","title":"Roots","artist":"Imagine Dragons","album":"Roots","image":"image.jpg"},{"path":"Imagine Dragons - Who We Are.mp3","title":"Who We Are","artist":"Imagine Dragons","album":"Smoke + Mirrors (Deluxe)","image":"image.jpg"},{"path":"Journey - Separate Ways (Worlds Apart).mp3","title":"Separate Ways (World...","artist":"Journey","album":"Frontiers","image":"image.jpg"},{"path":"Journey - Winds of March.mp3","title":"Winds of March","artist":"Journey","album":"Infinity","image":"image.jpg"},{"path":"KISS - I Was Made For Lovin' You.mp3","title":"I Was Made For Lovin...","artist":"KISS","album":"Dynasty","image":"image.jpg"},{"path":"Laura Branigan - Self Control.mp3","title":"Self Control","artist":"Laura Branigan","album":"Self Control","image":"image.jpg"},{"path":"Led Zeppelin - Immigrant Song - Remaster.mp3","title":"Immigrant Song - Rem...","artist":"Led Zeppelin","album":"Led Zeppelin III (Remaster)","image":"image.jpg"},{"path":"Linkin Park - Heavy Is the Crown.mp3","title":"Heavy Is the Crown","artist":"Linkin Park","album":"From Zero","image":"image.jpg"},{"path":"Linkin Park - Waiting for the End.mp3","title":"Waiting for the End","artist":"Linkin Park","album":"A Thousand Suns","image":"image.jpg"},{"path":"Luis Bacalov, Rocky Roberts - Django.mp3","title":"Django","artist":"Luis Bacalov/Rocky Roberts","album":"Quentin Tarantino’s Django Unchained Original Motion Picture Soundtrack","image":"image.jpg"},{"path":"Lynyrd Skynyrd - Sweet Home Alabama.mp3","title":"Sweet Home Alabama","artist":"Lynyrd Skynyrd","album":"Second Helping (Expanded Edition)","image":"image.jpg"},{"path":"Madonna - Like a Prayer.mp3","title":"Like a Prayer","artist":"Madonna","album":"Celebration (double disc version)","image":"image.jpg"},{"path":"Madonna - Material Girl.mp3","title":"Material Girl","artist":"Madonna","album":"Like a Virgin","image":"image.jpg"},{"path":"Marcus King, Arcane, League of Legends - Sucker (from the series Arcane League of Legends).mp3","title":"Sucker (from the ser...","artist":"Marcus King/Arcane/League of Legends","album":"Sucker (from the series Arcane League of Legends)","image":"image.jpg"},{"path":"Michael Jackson - Billie Jean.mp3","title":"Billie Jean","artist":"Michael Jackson","album":"Thriller 25 Super Deluxe Edition","image":"image.jpg"},{"path":"Michael Jackson - Smile.mp3","title":"Smile","artist":"Michael Jackson","album":"HIStory - PAST, PRESENT AND FUTURE - BOOK I","image":"image.jpg"},{"path":"Michael Jackson, Paul McCartney - The Girl Is Mine (with Paul McCartney).mp3","title":"The Girl Is Mine (wi...","artist":"Michael Jackson/Paul McCartney","album":"Thriller 25 Super Deluxe Edition","image":"image.jpg"},{"path":"MIKA - Grace Kelly.mp3","title":"Grace Kelly","artist":"MIKA","album":"Life In Cartoon Motion","image":"image.jpg"},{"path":"Modern Talking - Brother Louie.mp3","title":"Brother Louie","artist":"Modern Talking","album":"Ready For Romance","image":"image.jpg"},{"path":"Modern Talking - Cheri Cheri Lady.mp3","title":"Cheri Cheri Lady","artist":"Modern Talking","album":"Let's Talk About Love","image":"image.jpg"},{"path":"Modern Talking - Geronimo's Cadillac.mp3","title":"Geronimo's Cadillac","artist":"Modern Talking","album":"In The Middle Of Nowhere","image":"image.jpg"},{"path":"Modern Talking - You're My Heart, You're My Soul.mp3","title":"You're My Heart, You...","artist":"Modern Talking","album":"The First & Second Album (30th Anniversary Edition)","image":"image.jpg"},{"path":"Mother Mother - Burning Pile.mp3","title":"Burning Pile","artist":"Mother Mother","album":"O My Heart","image":"image.jpg"},{"path":"Mother Mother - Cry Christmas.mp3","title":"Cry Christmas","artist":"Mother Mother","album":"Cry Christmas","image":"image.jpg"},{"path":"Nat King Cole - Smile.mp3","title":"Smile","artist":"Nat King Cole","album":"The Nat King Cole Story","image":"image.jpg"},{"path":"Nat King Cole - When You're Smiling (The Whole World Smiles With You) - 2005 Digital Remaster.mp3","title":"When You're Smiling ...","artist":"Nat King Cole","album":"The World Of Nat King Cole (Expanded Edition)","image":"image.jpg"},{"path":"NSYNC - Bye Bye Bye - From Deadpool and Wolverine Soundtrack.mp3","title":"Bye Bye Bye - From D...","artist":"*NSYNC","album":"No Strings Attached","image":"image.jpg"},{"path":"Ottawan - D.I.S.C.O. - Single Version.mp3","title":"D.I.S.C.O. - Single ...","artist":"Ottawan","album":"D.I.S.C.O.","image":"image.jpg"},{"path":"Paul McCartney, Jeff Lynne - The World Tonight - 2020 Remaster.mp3","title":"The World Tonight - ...","artist":"Paul McCartney/Jeff Lynne","album":"Flaming Pie (Archive Collection)","image":"image.jpg"},{"path":"Poor Man's Poison - Feed the Machine.mp3","title":"Feed the Machine","artist":"Poor Man's Poison","album":"Feed the Machine","image":"image.jpg"},{"path":"Poor Man's Poison - Hell's Comin' with Me.mp3","title":"Hell's Comin' with M...","artist":"Poor Man's Poison","album":"Hell's Comin' with Me","image":"image.jpg"},{"path":"Queen - Killer Queen - Remastered 2011.mp3","title":"Killer Queen - Remas...","artist":"Queen","album":"Sheer Heart Attack (Deluxe Edition 2011 Remaster)","image":"image.jpg"},{"path":"Raffaella Carrà - Pedro.mp3","title":"Pedro","artist":"Raffaella Carrà","album":"Le Più Belle Canzoni","image":"image.jpg"},{"path":"RAT BOY, IBDY - Who's Ready for Tomorrow.mp3","title":"Who's Ready for Tomo...","artist":"RAT BOY/IBDY","album":"Cyberpunk 2077: Radio, Vol. 2 (Original Soundtrack)","image":"image.jpg"},{"path":"Rockwell - Somebody's Watching Me.mp3","title":"Somebody's Watching ...","artist":"Rockwell","album":"12\" 80s Classics","image":"image.jpg"},{"path":"Scorpions - Wind Of Change.mp3","title":"Wind Of Change","artist":"Scorpions","album":"Crazy World","image":"image.jpg"},{"path":"Stromae, Pomme, Arcane - Ma Meilleure Ennemie (from the series Arcane League of Legends).mp3","title":"Ma Meilleure Ennemie...","artist":"Stromae/Pomme/Arcane","album":"Ma Meilleure Ennemie (from the series Arcane League of Legends)","image":"image.jpg"},{"path":"Supertramp - Breakfast In America - 2010 Remastered.mp3","title":"Breakfast In America...","artist":"Supertramp","album":"Breakfast In America (Deluxe Edition)","image":"image.jpg"},{"path":"Supertramp - Give A Little Bit.mp3","title":"Give A Little Bit","artist":"Supertramp","album":"Even In The Quietest Moments","image":"image.jpg"},{"path":"Supertramp - The Logical Song - Remastered 2010.mp3","title":"The Logical Song - R...","artist":"Supertramp","album":"Breakfast In America (Deluxe Edition)","image":"image.jpg"},{"path":"Talking Heads - Psycho Killer - 2005 Remaster.mp3","title":"Psycho Killer - 2005...","artist":"Talking Heads","album":"Talking Heads '77 (Deluxe Version)","image":"image.jpg"},{"path":"Tame Impala - Let It Happen.mp3","title":"Let It Happen","artist":"Tame Impala","album":"Currents","image":"image.jpg"},{"path":"The Beach Boys - I Get Around (Mono).mp3","title":"I Get Around (Mono)","artist":"The Beach Boys","album":"All Summer Long (Mono & Stereo)","image":"image.jpg"},{"path":"The Beatles - Help!.mp3","title":"Help!","artist":"The Beatles","album":"Love","image":"image.jpg"},{"path":"The Beatles - I Want To Hold Your Hand - Remastered 2015.mp3","title":"I Want To Hold Your ...","artist":"The Beatles","album":"1 (Remastered)","image":"image.jpg"},{"path":"The Beatles - Now And Then.mp3","title":"Now And Then","artist":"The Beatles","album":"Now And Then","image":"image.jpg"},{"path":"The Castells - Some Enchanted Evening.mp3","title":"Some Enchanted Eveni...","artist":"The Castells","album":"So This Is Love","image":"image.jpg"},{"path":"The Cure - Lullaby - Remastered.mp3","title":"Lullaby - Remastered","artist":"The Cure","album":"Disintegration (Deluxe Edition)","image":"image.jpg"},{"path":"The Handsome Family - Far From Any Road.mp3","title":"Far From Any Road","artist":"The Handsome Family","album":"Singing Bones","image":"image.jpg"},{"path":"The Human Beinz - Nobody But Me.mp3","title":"Nobody But Me","artist":"The Human Beinz","album":"Nobody But Me","image":"image.jpg"},{"path":"The Mamas & The Papas - California Dreamin'.mp3","title":"California Dreamin'","artist":"The Mamas & The Papas","album":"All The Leaves Are Brown The Golden Era Collection","image":"image.jpg"},{"path":"The Rolling Stones - Paint It, Black.mp3","title":"Paint It, Black","artist":"The Rolling Stones","album":"Aftermath","image":"image.jpg"},{"path":"The Turtles - Elenore.mp3","title":"Elenore","artist":"The Turtles","album":"The Turtles Present The Battle of the Bands","image":"image.jpg"},{"path":"The Turtles - Happy Together.mp3","title":"Happy Together","artist":"The Turtles","album":"Happy Together","image":"image.jpg"},{"path":"The Turtles - You Showed Me.mp3","title":"You Showed Me","artist":"The Turtles","album":"The Turtles Present The Battle of the Bands","image":"image.jpg"},{"path":"The White Stripes - Seven Nation Army.mp3","title":"Seven Nation Army","artist":"The White Stripes","album":"Elephant","image":"image.jpg"},{"path":"Tom Jones - What The World Needs Now Is Love.mp3","title":"What The World Needs...","artist":"Tom Jones","album":"I Who Have Nothing","image":"image.jpg"},{"path":"TOTO - Africa.mp3","title":"Africa","artist":"TOTO","album":"Toto IV","image":"image.jpg"},{"path":"Twenty One Pilots - My Blood.mp3","title":"My Blood","artist":"Twenty One Pilots","album":"Trench","image":"image.jpg"},{"path":"Twenty One Pilots, Arcane, League of Legends - The Line (from the series Arcane League of Legends).mp3","title":"The Line (from the s...","artist":"Twenty One Pilots/Arcane/League of Legends","album":"The Line (from the series Arcane League of Legends)","image":"image.jpg"},{"path":"Wes Reeve - Never-Ending Summer.mp3","title":"Never-Ending Summer","artist":"Wes Reeve","album":"Never-Ending Summer","image":"image.jpg"},{"path":"Woodkid, Arcane, League of Legends - Guns for Hire (from the series Arcane League of Legends).mp3","title":"Guns for Hire (from ...","artist":"Woodkid/Arcane/League of Legends","album":"Guns for Hire (from the series Arcane League of Legends)","image":"image.jpg"},{"path":"Édith Piaf - Non, je ne regrette rien.mp3","title":"Non, je ne regrette ...","artist":"Édith Piaf","album":"Eternelle","image":"image.jpg"}];
+
+  let currentTrackIndex = 0;
+  let isPlaying = false;
+  let isShuffle = false; // Indica se o modo aleatório está ativado
+
+  // Carregar a primeira faixa
+  audio.src = tracks[currentTrackIndex].path;
+  audio.load();
+  updateMusicDetails(); // Atualiza as informações da música inicialmente
+
+  // Controlar play/pause
+  playPauseButton.addEventListener("click", () => {
+    if (isPlaying) {
+      audio.pause();
+      playPauseButton.innerHTML = '<i class="bi bi-play"></i>'; // Ícone de play
+    } else {
+      audio.play();
+      playPauseButton.innerHTML = '<i class="bi bi-pause"></i>'; // Ícone de pause
+    }
+    isPlaying = !isPlaying;
+  });
+
+  // Tocar a faixa anterior
+  prevButton.addEventListener("click", () => {
+    if (isShuffle) {
+      currentTrackIndex = getRandomTrackIndex(); // Escolher uma faixa aleatória
+    } else {
+      currentTrackIndex = (currentTrackIndex === 0) ? tracks.length - 1 : currentTrackIndex - 1;
+    }
+    loadAndPlayTrack();
+  });
+
+  // Tocar a próxima faixa
+  nextButton.addEventListener("click", () => {
+    if (isShuffle) {
+      currentTrackIndex = getRandomTrackIndex(); // Escolher uma faixa aleatória
+    } else {
+      currentTrackIndex = (currentTrackIndex === tracks.length - 1) ? 0 : currentTrackIndex + 1;
+    }
+    loadAndPlayTrack();
+  });
+
+  // Atualizar a posição da barra de progresso conforme o áudio toca
+  audio.addEventListener("timeupdate", () => {
+    const progressValue = (audio.currentTime / audio.duration) * 100;
+    progress.value = progressValue;
+  });
+
+  // Atualizar a posição do áudio quando o controle de progresso for alterado
+  progress.addEventListener("input", () => {
+    const value = progress.value;
+    audio.currentTime = (value / 100) * audio.duration;
+  });
+
+  // Quando a faixa estiver carregada, começa a reprodução
+  audio.addEventListener("loadedmetadata", () => {
+    if (isPlaying) {
+      playPauseButton.innerHTML = '<i class="bi bi-pause"></i>'; // Quando já estiver tocando, mantém o botão em "pause"
+    } else {
+      playPauseButton.innerHTML = '<i class="bi bi-play"></i>'; // Caso contrário, exibe o botão de "play"
+    }
+  });
+
+  // Evento "ended" para ir para a próxima faixa automaticamente
+  audio.addEventListener("ended", () => {
+    if (isShuffle) {
+      currentTrackIndex = getRandomTrackIndex(); // Se o modo aleatório estiver ativado
+    } else {
+      currentTrackIndex = (currentTrackIndex === tracks.length - 1) ? 0 : currentTrackIndex + 1; // Modo sequencial
+    }
+    loadAndPlayTrack(); // Carrega e toca a próxima faixa
+  });
+
+  // Função para carregar e tocar a faixa
+  function loadAndPlayTrack() {
+    audio.src = tracks[currentTrackIndex].path;
+    audio.load(); // Recarregar a faixa
+    audio.play(); // Começar a tocar imediatamente
+    playPauseButton.innerHTML = '<i class="bi bi-pause"></i>'; // Atualizar o botão para "pause"
+    updateMusicDetails(); // Atualiza o título, artista, álbum e imagem
+    isPlaying = true;
+  }
+
+  // Função para obter um índice aleatório
+  function getRandomTrackIndex() {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * tracks.length);
+    } while (randomIndex === currentTrackIndex); // Garante que não repita a faixa atual
+    return randomIndex;
+  }
+
+  // Alternar entre modo sequencial e aleatório
+  shuffleButton.addEventListener("click", () => {
+    isShuffle = !isShuffle;
+    shuffleButton.classList.toggle("active", isShuffle); // Aplica o destaque no botão
+    if (isShuffle) {
+      console.log("Modo aleatório ativado");
+    } else {
+      console.log("Modo sequencial ativado");
+    }
+  });
+
+  // Carregar e tocar a primeira faixa
+  audio.play();
+  isPlaying = true;
+  playPauseButton.innerHTML = '<i class="bi bi-pause"></i>';
+
+  // Definir o volume inicial para o áudio
+  audio.volume = 1; // Volume máximo ao iniciar
+
+  // Atualizar o volume do áudio conforme o controle de volume é ajustado
+  volumeControl.addEventListener("input", () => {
+    const volume = volumeControl.value / 100;
+    audio.volume = volume;
+
+    // Alterar o ícone de volume dependendo do nível do volume
+    if (volume == 0) {
+      volumeIcon.className = "bi bi-volume-mute"; // Ícone de mudo
+    } else if (volume < 0.5) {
+      volumeIcon.className = "bi bi-volume-down"; // Ícone de volume baixo
+    } else {
+      volumeIcon.className = "bi bi-volume-up"; // Ícone de volume alto
+    }
+  });
+
+  // Função para atualizar o título, artista, álbum e imagem da música
+  function updateMusicDetails() {
+    musicTitle.textContent = tracks[currentTrackIndex].title;  // Atualiza o título
+    musicArtist.textContent = `Artista: ${tracks[currentTrackIndex].artist}`;  // Atualiza o artista
+    musicAlbum.textContent = `Álbum: ${tracks[currentTrackIndex].album}`;   // Atualiza o álbum
+    musicImage.src = tracks[currentTrackIndex].image;  // Atualiza a imagem da capa do álbum
+  }
+
+  // Fechar a sub-aba ao clicar no botão de fechar
+  closeMusicListButton.addEventListener("click", () => {
+    musicListContainer.style.display = "none";
+  });
+
+  // Mostrar/ocultar a sub-aba
+  musicListIcon.addEventListener("click", () => {
+    musicListContainer.style.display = musicListContainer.style.display === "block" ? "none" : "block";
+  });
+
+  // Função para atualizar a lista de músicas
+  function updateMusicList() {
+    // Limpar a lista de músicas
+    musicList.innerHTML = "";
+
+    // Adicionar cada música à lista
+    tracks.forEach((track, index) => {
+      const li = document.createElement("li");
+      li.textContent = track.title;  // Título da música
+      li.addEventListener("click", () => {
+        currentTrackIndex = index;
+        loadAndPlayTrack();  // Carregar e tocar a música selecionada
+        musicListContainer.style.display = "none";  // Fechar a sub-aba
+      });
+      musicList.appendChild(li);
+    });
+  }
+
+  // Atualizar a lista de músicas ao carregar
+  updateMusicList();
+
+</script>
+
+</html>
